@@ -73,7 +73,6 @@ export default function Signup() {
         password2: "",
         isPremiumUser: false,
       });
-      navigate("/");
     } catch (error) {
       console.error("There was an error!", error);
     }
