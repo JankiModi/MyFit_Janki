@@ -31,7 +31,7 @@ import Triceps from "./Body-parts/Triceps";
 import Payment from "./Components/Payment";
 import CheckoutForm from "./Components/CheckoutForm";
 import Predict from "./Components/Predict";
-
+import Diet from "./Components/Diet";
 function App() {
   const GlobalStyle = createGlobalStyle`
 :root {
@@ -543,7 +543,7 @@ section {
             <Route path="trapsmiddle" element={<TrapsMiddle />} />
             <Route path="triceps" element={<Triceps />} />
             <Route path="payment" element={<CheckoutForm />} />
-
+            <Route path="diet" element={<Diet />} />
             <Route path="calculate_bmi" element={<Calculate_BMI />} />
             <Route path="predict" element={<Predict />} />
           </Routes>
@@ -573,7 +573,7 @@ section {
                   <Link to="/calculate_bmi">BMI Calculator</Link>
                 </li>
                 <li>
-                  <Link to="/predict">Diet</Link>
+                  <Link to="/diet">Diet</Link>
                 </li>
 
                 {/* <li><Link to="/fetchuser">User</Link></li> */}

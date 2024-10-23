@@ -373,7 +373,7 @@ export default function Calculate_BMI() {
                       </div>
                       <div className="weight-goal-buttons">
                         <Link
-                          to="/predict"
+                          to="/diet"
                           className="weight-goal-button"
                           onClick={() => {
                             localStorage.setItem("bmi", bmi);
