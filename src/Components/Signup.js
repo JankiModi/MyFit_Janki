@@ -3,9 +3,38 @@ import "../user.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// Modal Component
+
+const Modal = ({ isOpen, handleClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <div className="modal-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" />
+          </svg>
+        </div>
+        <h2 className="modal-title">Welcome to MyFit!</h2>
+        <p className="modal-message">
+          You've successfully created an account !
+        </p>
+        <button className="modal-button" onClick={handleClose}>
+          Login to Continue
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function Signup() {
   const navigate = useNavigate();
-
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -36,6 +65,7 @@ export default function Signup() {
         valid_data
       );
       console.log("User registered:", response.data);
+      setIsModalOpen(true);
       setFormData({
         username: "",
         email: "",
@@ -48,7 +78,11 @@ export default function Signup() {
       console.error("There was an error!", error);
     }
   };
-
+  // Handle modal close and navigate to home page
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    navigate("/login"); // Navigate to home page after closing modal
+  };
   return (
     <div>
       <section className="login-page">
@@ -148,6 +182,7 @@ export default function Signup() {
                 </Link>
               </div>
             </form>
+            <Modal isOpen={isModalOpen} handleClose={handleCloseModal} />
           </div>
         </div>
       </section>

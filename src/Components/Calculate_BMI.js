@@ -412,43 +412,50 @@ export default function Calculate_BMI() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 10rem;
+          padding: 2rem;
           font-family: Arial, sans-serif;
         }
+
         .bmi-calculator-card {
           width: 100%;
           max-width: 120rem;
           background-color: var(--black);
           border-radius: 1rem;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          padding: 3rem;
+          padding: 2rem;
         }
+
         .bmi-calculator-title {
           font-size: 2.5rem;
           font-weight: 700;
           text-align: center;
           margin-bottom: 2rem;
         }
+
         .text-gray {
           color: var(--white);
           font-size: 3rem;
         }
+
         .text-red {
           color: var(--red);
           font-size: 3rem;
         }
+
         .bmi-calculator-form {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+          display: flex;
+          flex-direction: column;
           gap: 1.7rem;
         }
+
         .input-group {
           position: relative;
         }
+
         .bmi-input,
         .bmi-select {
           width: 100%;
-          height: 125%;
+          height: 5rem;
           background-color: #2e3649;
           color: #ffffff;
           padding: 1rem 1.7rem;
@@ -456,6 +463,7 @@ export default function Calculate_BMI() {
           border-radius: 1rem;
           font-size: 2rem;
         }
+
         .input-label {
           position: absolute;
           right: 2rem;
@@ -464,8 +472,8 @@ export default function Calculate_BMI() {
           color: #9ca3af;
           font-size: 1.5rem;
         }
+
         .bmi-submit-button {
-          grid-column: span 2;
           background-color: var(--red);
           color: var(--white);
           padding: 1.7rem;
@@ -475,57 +483,67 @@ export default function Calculate_BMI() {
           font-weight: 600;
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease;
+          margin-top: 1rem;
         }
+
         .bmi-submit-button:hover {
           background-color: var(--red);
           transform: scale(1.05);
         }
+
         .bmi-message {
           color: var(--white);
           text-align: center;
           margin-top: 1.5rem;
           font-size: 2rem;
         }
+
         .results-container {
           margin-top: 3rem;
           background-color: var(--black);
           padding: 2rem;
           border-radius: 0.75rem;
         }
+
         .results-title {
           font-size: 2.5rem;
           color: var(--red);
           text-align: left;
           margin-bottom: 1.5rem;
         }
+
         .results-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          display: flex;
+          flex-direction: column;
           gap: 1.5rem;
         }
+
         .result-item {
           background-color: #1e2130;
           padding: 1.5rem;
           border-radius: 0.5rem;
         }
+
         .full-width {
-          grid-column: span 2;
+          width: 100%;
         }
+
         .result-label {
           font-size: 2rem;
           color: var(--red);
           margin-bottom: 0.75rem;
-
-          color: var(--red);
         }
+
         .result-value {
           font-size: 1.7rem;
           font-weight: 600;
           color: #ffffff;
         }
+
         .weight-goal-container {
           margin-top: 4rem;
         }
+
         .weight-goal-input {
           width: 100%;
           background-color: #1e2130;
@@ -536,11 +554,13 @@ export default function Calculate_BMI() {
           font-size: 1.7rem;
           margin-bottom: 3rem;
         }
+
         .weight-goal-buttons {
           display: flex;
-          justify-content: left;
+          flex-direction: column;
           gap: 1.5rem;
         }
+
         .weight-goal-button {
           background-color: var(--red);
           color: #ffffff;
@@ -551,47 +571,55 @@ export default function Calculate_BMI() {
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
         .weight-goal-button:hover {
           background-color: var(--red);
           transform: scale(1.05);
         }
+
         .adjusted-plan {
           margin-top: 3rem;
           background-color: #1e2130;
           padding: 2rem;
           border-radius: 0.75rem;
         }
+
         .adjusted-plan-title {
           font-size: 2.5rem;
           color: var(--red);
           text-align: center;
           margin-bottom: 1.5rem;
         }
+
         .adjusted-plan-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          display: flex;
+          flex-direction: column;
           gap: 1.5rem;
         }
+
         .adjusted-plan-label {
           font-size: 1.7rem;
           color: var(--red);
           margin-bottom: 0.5rem;
         }
+
         .adjusted-plan-value {
           font-size: 1.7rem;
           font-weight: bold;
           color: #ffffff;
         }
+
         .radio-group {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           margin-bottom: 20px;
         }
 
         .radio-label {
           display: flex;
           align-items: center;
-          margin-right: 20px;
+          margin-bottom: 10px;
           color: var(--white);
           font-size: 16px;
           cursor: pointer;
@@ -623,6 +651,50 @@ export default function Calculate_BMI() {
           height: 10px;
           border-radius: 50%;
           background-color: var(--red);
+        }
+
+        @media (min-width: 768px) {
+          .bmi-calculator-container {
+            padding: 10rem;
+          }
+
+          .bmi-calculator-card {
+            padding: 3rem;
+          }
+
+          .bmi-calculator-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .bmi-submit-button {
+            grid-column: span 2;
+          }
+
+          .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+
+          .weight-goal-buttons {
+            flex-direction: row;
+            justify-content: left;
+          }
+
+          .adjusted-plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+
+          .radio-group {
+            flex-direction: row;
+            align-items: center;
+          }
+
+          .radio-label {
+            margin-right: 20px;
+            margin-bottom: 0;
+          }
         }
       `}</style>
     </div>

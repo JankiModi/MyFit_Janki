@@ -4,9 +4,39 @@ import "../user.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Modal Component
+
+const Modal = ({ isOpen, handleClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <div className="modal-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" />
+          </svg>
+        </div>
+        <h2 className="modal-title">Welcome Back!</h2>
+        <p className="modal-message">
+          You've successfully logged in to your account.
+        </p>
+        <button className="modal-button" onClick={handleClose}>
+          Continue to Home
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function Login({ setData }) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -38,21 +68,25 @@ export default function Login({ setData }) {
         localStorage.setItem("username", data.username);
         localStorage.setItem("email", data.email);
         localStorage.setItem("isPremiumUser", data.isPremiumUser);
-        setMessage(data.username + "" + data.email + "" + data.isPremiumUser);
+
         setData({
           username: data.username,
           email: data.email,
           isPremiumUser: data.isPremiumUser,
         });
         console.log("User logged in:", response.data);
-        alert("Login successfull !");
-        navigate("/");
+        setIsModalOpen(true);
       }
     } catch (error) {
       console.error("Login failed!", error);
+      setMessage("No record found. Please Try Again!");
     }
   };
-
+  // Handle modal close and navigate to home page
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    navigate("/"); // Navigate to home page after closing modal
+  };
   return (
     <section className="login-page">
       <div className="image-section"></div>
@@ -110,12 +144,14 @@ export default function Login({ setData }) {
             <button className="submit" type="submit">
               Submit
             </button>
+            {message && <p className="error-message">{message}</p>}
             <div className="login-footer">
               <Link to="/signup" className="new-user">
                 New to MyFit?
               </Link>
             </div>
           </form>
+          <Modal isOpen={isModalOpen} handleClose={handleCloseModal} />
         </div>
       </div>
     </section>
