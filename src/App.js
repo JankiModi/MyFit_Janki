@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import axios from "axios";
 import About from "./Components/About";
 // import Navbar from './Components/Navbar';
 import Home from "./Components/Home";
@@ -451,8 +452,42 @@ section {
   };
 
   const [isLoading, setIsLoading] = useState(true);
+  const wakeUpServer = async () => {
+    try {
+      const response = await axios.post(
+        "https://my-fit-backend-2.onrender.com/", // Add trailing slash and proper endpoint
+        { try: "wake up server" }, // empty body
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Server wake-up successful:", response.data);
+    } catch (error) {
+      console.log("Server wake-up attempt made");
+    }
+  };
+  const makeAPICall = async () => {
+    await wakeUpServer(); // Wake up server first
+
+    // Wait a bit for server to fully wake up
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    // Your actual API call
+    const response = await fetch("https://my-fit-backend-2.onrender.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: { try: "wake up server" },
+    });
+    console.log(response);
+    // ... handle response
+  };
 
   useEffect(() => {
+    makeAPICall();
     // First, handle the loading timer
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
