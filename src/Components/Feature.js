@@ -3,32 +3,32 @@ import "../style1.css";
 
 const tiers = [
   {
-    name: "ELITE",
+    name: "HEALTH",
     image: "/images/feature1.jpg",
     features: [
-      "At-center group classes",
-      "All ELITE & PRO gyms",
-      "At-home live workouts",
+      "Calculations of BMI, BMR",
+      "Calorie Calculation",
+      "Premium Diet",
     ],
     color: "var(--red)",
   },
   {
-    name: "PRO",
+    name: "DIET",
     image: "/images/feature2.png",
     features: [
-      "All PRO gyms",
-      "2 Sessions/month at ELITE gyms & group classes",
-      "At-home live workouts",
+      "Premium feature",
+      "Diet customised based on your calories intake",
+      "Any-time diet customisation",
     ],
     color: "var(--red)",
   },
   {
-    name: "HOME",
+    name: "WORKOUT",
     image: "/images/feature3.jpg",
     features: [
       "At home workouts",
-      "Celebrity Workouts",
-      "Goal-based Workouts and Meditation Sessions",
+      "Workouts curated for all body parts",
+      "Goal-based Workouts",
     ],
     color: "var(--red)",
   },
@@ -57,7 +57,7 @@ export default function Feature() {
               </ul>
               <div className="button-container">
                 <button className="btn-try">TRY FOR FREE</button>
-                <button className="btn-learn">LEARN MORE</button>
+                <button className="btn-learn">GET PREMIUM</button>
               </div>
             </div>
           </div>
