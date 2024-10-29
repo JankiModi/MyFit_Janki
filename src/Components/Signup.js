@@ -3,8 +3,20 @@ import "../user.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// Modal Component
+// Loading Spinner Component
+const LoadingSpinner = ({ isOpen }) => {
+  if (!isOpen) return null;
 
+  return (
+    <div className="loading-overlay">
+      <div className="loading-content">
+        <div className="spinner"></div>
+      </div>
+    </div>
+  );
+};
+
+// Modal Component
 const Modal = ({ isOpen, handleClose }) => {
   if (!isOpen) return null;
 
@@ -35,6 +47,7 @@ const Modal = ({ isOpen, handleClose }) => {
 export default function Signup() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -52,13 +65,18 @@ export default function Signup() {
     if (formData.password1 !== formData.password2) {
       alert("Passwords don't match");
       navigate("/signup");
+      return;
     }
+
     const valid_data = {
       username: formData.username,
       email: formData.email,
       password: formData.password1,
       isPremiumUser: false,
     };
+
+    setIsLoading(true); // Set loading to true during API call
+
     try {
       const response = await axios.post(
         "https://my-fit-backend-2.onrender.com/app/register/",
@@ -75,13 +93,16 @@ export default function Signup() {
       });
     } catch (error) {
       console.error("There was an error!", error);
+    } finally {
+      setIsLoading(false); // Set loading to false once response is received
     }
   };
-  // Handle modal close and navigate to home page
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     navigate("/login"); // Navigate to home page after closing modal
   };
+
   return (
     <div>
       <section className="login-page">
@@ -104,7 +125,7 @@ export default function Signup() {
                   required
                 />
                 <svg
-                  class="input-icon"
+                  className="input-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -144,7 +165,7 @@ export default function Signup() {
                   required
                 />
                 <svg
-                  class="input-icon"
+                  className="input-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -165,7 +186,7 @@ export default function Signup() {
                   required
                 />
                 <svg
-                  class="input-icon"
+                  className="input-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -185,6 +206,9 @@ export default function Signup() {
           </div>
         </div>
       </section>
+
+      {/* Loading Spinner */}
+      <LoadingSpinner isOpen={isLoading} />
     </div>
   );
 }

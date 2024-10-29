@@ -4,8 +4,21 @@ import "../user.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// Modal Component
+// Loading Spinner Component
+const LoadingModal = ({ isOpen }) => {
+  if (!isOpen) return null;
 
+  return (
+    <div className="loading-overlay">
+      <div className="loading-content">
+        <div className="spinner"></div>
+        
+      </div>
+    </div>
+  );
+};
+
+// Modal Component
 const Modal = ({ isOpen, handleClose }) => {
   if (!isOpen) return null;
 
@@ -36,7 +49,8 @@ const Modal = ({ isOpen, handleClose }) => {
 export default function Login({ setData }) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -48,6 +62,7 @@ export default function Login({ setData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Show loading spinner
     try {
       const response = await axios.post(
         "https://my-fit-backend-2.onrender.com/app/login/",
@@ -62,7 +77,6 @@ export default function Login({ setData }) {
       const data = response.data;
 
       if (data.status === "success") {
-        // Store JWT tokens and user details in localStorage
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
         localStorage.setItem("username", data.username);
@@ -80,13 +94,16 @@ export default function Login({ setData }) {
     } catch (error) {
       console.error("Login failed!", error);
       setMessage("No record found. Please Try Again!");
+    } finally {
+      setIsLoading(false); // Hide loading spinner
     }
   };
-  // Handle modal close and navigate to home page
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate("/"); // Navigate to home page after closing modal
+    navigate("/");
   };
+
   return (
     <section className="login-page">
       <div className="image-section"></div>
@@ -110,7 +127,7 @@ export default function Login({ setData }) {
                 required
               />
               <svg
-                class="input-icon"
+                className="input-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -134,7 +151,7 @@ export default function Login({ setData }) {
                 required
               />
               <svg
-                class="input-icon"
+                className="input-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -152,6 +169,7 @@ export default function Login({ setData }) {
             </div>
           </form>
           <Modal isOpen={isModalOpen} handleClose={handleCloseModal} />
+          <LoadingModal isOpen={isLoading} />
         </div>
       </div>
     </section>
