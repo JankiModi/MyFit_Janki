@@ -552,7 +552,7 @@ section {
               element={
                 <>
                   <Directory />
-                  <Footer />
+                  
                 </>
               }
             />
