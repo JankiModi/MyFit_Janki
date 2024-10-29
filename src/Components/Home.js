@@ -26,7 +26,7 @@ export default function Home() {
           <div className="content1">
             <span>be strong, be fit</span>
             <h3>Make yourself stronger than your excuses.</h3>
-            <a href="/" className="btn1">
+            <a href="/login" className="btn1">
               get started
             </a>
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
           <div className="content1">
             <span>be strong, be fit</span>
             <h3>Make yourself stronger than your excuses.</h3>
-            <a href="/" className="btn1">
+            <a href="/login" className="btn1">
               get started
             </a>
           </div>
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="content1">
             <span>be strong, be fit</span>
             <h3>Make yourself stronger than your excuses.</h3>
-            <a href="/" className="btn1">
+            <a href="/login" className="btn1">
               get started
             </a>
           </div>
